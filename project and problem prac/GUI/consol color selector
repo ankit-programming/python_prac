@@ -1,0 +1,92 @@
+#color chooser from gui and os module
+import tkinter.messagebox as tmsg
+from tkinter import *
+import random
+import os
+root=Tk()
+root.configure(bg="OliveDrab2")
+#**********owner info
+info='''------------------------
+/Powerd by AKELA\\
+================
+/Owner name Ankit\\
+---------------------------'''
+#show in gui window
+Label(root,text=f"{info}",fg="OliveDrab4",bg="OliveDrab2",font="comicsansms 13 italic").grid(row="0",column="0",ipadx=30)
+#***********
+
+#**********defining function
+#function
+def work():
+    a=input_value.get()
+    print(f"Color code is {a}")
+    os.system(f"color {a}")
+def cb_work():
+    radio_button_value=var.get()
+    random_fg_code=random.randint(1,9)
+    random_bg_code=random.choice(["a","b","c","d","e","f"])
+    os.system(f"color {random_fg_code}{random_bg_code}")
+    print(f"color code is {random_fg_code}{random_bg_code}")
+def printmsg():
+    ginfo='''This program will help you to choose
+good color combination for your python cui consol
+
+How To Use:
+See code box and type text and background color code
+
+color code:
+[text color code][background color code]
+'''
+    tmsg.showinfo("Information",f"{ginfo}")
+#***********
+
+
+#-------win work    
+#win namme
+root.title("color")
+#win resolutions
+root.minsize(225,383)
+root.maxsize(225,383)
+#-----
+
+
+#---------------------color selection work
+#creating frame
+frame=Frame(root,borderwidth=7,bg="gold3",relief=SUNKEN,padx=5,pady=4)
+frame.grid(row=2,column=0,padx=2,pady=3,ipadx=2,ipady=3)
+
+#bg work
+bg='''Background
+0 = Black\n1 = Blue\n2 = Green\n3 = Aqua\n4 = Red\n5 = Purple\n6 = Yellow\n7 = White'''
+f2=Frame(frame,bg="light green",highlightbackground="SpringGreen4",highlightthickness=3)
+f2.grid(row=2,column=1)
+Label(f2,text=f"{bg}",bg="light green",font="comicsansms 9 italic ").grid(row=2,column=0)
+
+#fg work
+fg='''Text color\n 8 = Gray\n9 = Light Blue\nA = Light Green\nB= Light Aqua\nC = Light Red\nD = Light Purple\nE = Light Yellow\nF = Bright White'''
+f1=Frame(frame,bg="light green",highlightbackground="SpringGreen4",highlightthickness=3)
+f1.grid(row=2,column=0)
+Label(f1,text=f"{fg}",bg="light green",font="comicsansms 9 italic " ).grid(row=2,column=1,padx=2,pady=3,ipadx=2,ipady=3)
+#---------------------
+
+#--------input box
+input_value=Entry(root,textvariable=StringVar(),fg="green")
+input_value.grid(row="3",column="0",padx=1)
+#--------
+
+
+#------button
+select_button=Button(root,text="select",command=work,bg="OliveDrab4",fg="white",font="comicsansms 9 italic ")
+select_button.grid(row="4",column="0",pady=5)
+
+#radio button
+var=IntVar()
+radio_button=Radiobutton(root,text="color loop",variable=var,bg="OliveDrab4",fg="white",font="comicsansms 9 italic ",value=0,command=cb_work)
+radio_button.grid(row="5",column="0")
+
+#bitmaps
+Button(root,bitmap="question",command=printmsg).place(x=4,y=255)
+#-----
+
+root.mainloop()
+
