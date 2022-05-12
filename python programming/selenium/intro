@@ -1,0 +1,22 @@
+#web se html code lene ke leye ham id , class ,name pe dhyand dete hai comanly to teach selenium
+#selenium me jab be ham koye be info dalte hai to vo web ke upper se search kerna suru kerta ha to hame unique chij dale to acha hai
+
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service # to avoid executable_path has been deprecated error
+from selenium.webdriver.common.by import By#to avoid desperit error
+
+path = "F:\programming\python\selenium\driver\chromedriver"
+service = Service(path)
+driver = webdriver.Chrome(service=service) # to avoid executable_path has been deprecated error
+driver.get("https://www.samtradingtips.com/p/live-signal-forex-and-binary.html")
+
+print("trying to get elements")
+search = driver.find_elements(By.XPATH,'/html/body/div[1]/div[2]/div[2]/div/div/div[1]/div[4]/div[2]/span')
+
+
+for text in search:
+    print("in for loop")
+    print(text)
+    driver.quit()
+
+
