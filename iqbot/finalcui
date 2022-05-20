@@ -1,0 +1,182 @@
+from iqoptionapi.stable_api import IQ_Option
+import requests
+import time
+API = IQ_Option("techyankit199@gmail.com","ankitsaini2003")
+API.connect()
+print(API.check_connect())#checking is bot conected to iq server
+while True:
+    try:
+        #collecting data from website.taken code from insomnia 
+        url = "https://ssltsw.forexprostools.com/api.php"
+        querystring = {"action":"refresher","pairs":"1,2,3,5,7,9,15","timeframe":"60","lang":"1"}
+        headers = {
+            'Accept': "text/plain, */*",
+            'Accept-Language': "en-US,en;q=0.9",
+            'Connection': "keep-alive",
+            'DNT': "1",
+            'Referer': "https://ssltsw.forexprostools.com/?lang=1&forex=1,2,3,5,7,9,15,10,11,12&commodities=8830,8836,8831,8849,8833,8862,8832&indices=175,166,172,27,179,170,174&stocks=334,345,346,347,348,349,350&tabs=1,2,3,4",
+            'Sec-Fetch-Dest': "empty",
+            'Sec-Fetch-Mode': "cors",
+            'Sec-Fetch-Site': "same-origin",
+            'User-Agent': "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.64 Safari/537.36",
+            'X-Requested-With': "XMLHttpRequest",
+            'sec-ch-ua': "^\^"
+        }
+        response = requests.request("GET", url, headers=headers, params=querystring)
+        data = response.json()
+
+
+        #1 EUR/USD
+        eurUSD= data["1"]
+        eurUSDsummaryName = eurUSD["summaryName"]
+        eurUSDtechnicalSummary = eurUSD["technicalSummary"]
+        eurUSDarrowBoxClass = eurUSD["arrowBoxClass"]
+        if eurUSDtechnicalSummary == "Strong Buy" and eurUSDarrowBoxClass == "upArrow":
+            with open("eurusdbuy.txt","a") as x:
+                x.write("buy.")
+                with open("eurusdbuy.txt","r") as x:
+                    for i in x:
+                        s = i.split(".")
+                        if s[0]=="buy" and s[1]=="":
+                            API.buy(1,"EURUSD","call",1)#take buy trade
+                            print("buy eurusd")           
+        elif eurUSDtechnicalSummary == "Strong Sell" and eurUSDarrowBoxClass == "downArrow": 
+            with open("eurusdsell.txt","a") as x:
+                x.write("sell.")
+                with open("eurusdsell.txt","r") as x:
+                    for i in x:
+                        s = i.split(".")
+                        if s[0]=="sell" and s[1]=="":
+                            API.buy(1,"EURUSD","put",1)#take buy trade
+                            print("sell eurusd")     
+        else:
+            with open("eurusdbuy.txt","w+") as x:
+                x.write("")  
+            with open("eurusdsell.txt","w+") as x:
+                x.write("")
+              
+
+        #2 GBP/USD
+        gbpusd= data["2"]
+        gbpusdsummaryName = gbpusd["summaryName"]
+        gbpusdtechnicalSummary = gbpusd["technicalSummary"]
+        gbpusdarrowBoxClass = gbpusd["arrowBoxClass"]
+        if gbpusdtechnicalSummary == "Strong Buy" and gbpusdarrowBoxClass == "upArrow":
+            with open("gbpusdbuy.txt","a") as x:
+                x.write("buy.")
+                with open("gbpusdbuy.txt","r") as x:
+                    for i in x:
+                        s = i.split(".")
+                        if s[0]=="buy" and s[1]=="":
+                            API.buy(1,"GBPUSD","call",1)#take buy trade
+                            print("buy gbpusd")          
+        elif gbpusdtechnicalSummary == "Strong Sell" and gbpusdarrowBoxClass == "downArrow": 
+            with open("gbpusdsell.txt","a") as x:
+                x.write("sell.")
+                with open("gbpusdsell.txt","r") as x:
+                    for i in x:
+                        s = i.split(".")
+                        if s[0]=="sell" and s[1]=="":
+                            API.buy(1,"GBPUSD","put",1)#take buy trade
+                            print("sell gbpusd")
+        else:
+            with open("gbpusdsell.txt","w+") as x:
+                x.write("")  
+            with open("gbpusdbuy.txt","w+") as x:
+                x.write("")
+              
+        #3 USD/JPY 
+        usdjpy= data["3"]
+        usdjpysummaryName = usdjpy["summaryName"]
+        usdjpytechnicalSummary = usdjpy["technicalSummary"]
+        usdjpyarrowBoxClass = usdjpy["arrowBoxClass"]
+        if usdjpytechnicalSummary == "Strong Buy" and usdjpyarrowBoxClass == "upArrow":
+            with open("usdjpybuy.txt","a") as x:
+                x.write("buy.")
+                with open("usdjpybuy.txt","r") as x:
+                    for i in x:
+                        s = i.split(".")
+                        if s[0]=="buy" and s[1]=="":
+                            API.buy(1,"USDJPY","call",1)#take buy trade
+                            print("buy usdjpy")
+        elif usdjpytechnicalSummary == "Strong Sell" and usdjpyarrowBoxClass == "downArrow": 
+            with open("usdjpysell.txt","a") as x:
+                x.write("sell.")
+                with open("usdjpysell.txt","r") as x:
+                    for i in x:
+                        s = i.split(".")
+                        if s[0]=="sell" and s[1]=="":
+                            API.buy(1,"USDJPY","put",1)#take buy trade
+                            print("sell usdjpy")
+        else:
+            with open("usdjpybuy.txt","w+") as x:
+                x.write("")  
+            with open("usdjpysell.txt","w+") as x:
+                x.write("")
+              
+
+        #9 EUR/JPY
+        eurjpy= data["9"]
+        eurjpysummaryName = eurjpy["summaryName"]
+        eurjpytechnicalSummary = eurjpy["technicalSummary"]
+        eurjpyarrowBoxClass = eurjpy["arrowBoxClass"]
+        if eurjpytechnicalSummary == "Strong Buy" and eurjpyarrowBoxClass == "upArrow":
+               with open("eurjpybuy.txt","a") as x:
+                x.write("buy.")
+                with open("eurjpybuy.txt","r") as x:
+                    for i in x:
+                        s = i.split(".")
+                        if s[0]=="buy" and s[1]=="":
+                            API.buy(1,"EURJPY","call",1)#take buy trade
+                            print("buy EURJPY")
+        elif eurjpytechnicalSummary == "Strong Sell" and eurjpyarrowBoxClass == "downArrow":
+            with open("eurjpysell.txt","a") as x:
+                x.write("sell.")
+                with open("eurjpysell.txt","r") as x:
+                    for i in x:
+                        s = i.split(".")
+                        if s[0]=="sell" and s[1]=="":
+                            API.buy(1,"EURJPY","put",1)#take buy trade
+                            print("sell eurjpy")         
+        else:
+            with open("eurjpybuy.txt","w+") as x:
+                x.write("")  
+            with open("eurjpysell.txt","w+") as x:
+                x.write("")
+              
+
+        #5 AUD/USD
+        audusd= data["5"]
+        audusdsummaryName = audusd["summaryName"]
+        audusdtechnicalSummary = audusd["technicalSummary"]
+        audusdarrowBoxClass = audusd["arrowBoxClass"]
+        if audusdtechnicalSummary == "Strong Buy" and audusdarrowBoxClass == "upArrow":
+               with open("audusdbuy.txt","a") as x:
+                x.write("buy.")
+                with open("audusdbuy.txt","r") as x:
+                    for i in x:
+                        s = i.split(".")
+                        if s[0]=="buy" and s[1]=="":
+                            API.buy(1,"AUDUSD","call",1)#take buy trade
+                            print("buy audusd")
+        elif audusdtechnicalSummary == "Strong Sell" and audusdarrowBoxClass == "downArrow": 
+            with open("audusdsell.txt","a") as x:
+                x.write("sell.")
+                with open("audusdsell.txt","r") as x:
+                    for i in x:
+                        s = i.split(".")
+                        if s[0]=="sell" and s[1]=="":
+                            API.buy(1,"AUDUSD","put",1)#take buy trade
+                            print("sell ausdusd")
+        else:
+            with open("audusdbuy.txt","w+") as x:
+                x.write("")  
+            with open("audusdsell.txt","w+") as x:
+                x.write("")
+                  
+
+        print("----------------------------")
+    except Exception as network_Error:
+        time.sleep(10)
+
+#GUI work
