@@ -1,0 +1,13 @@
+make virtual enve in python 
+
+1
+open forlder in which you want to make venv
+
+2
+open cmd on that directry
+
+3 MAKE VENV
+<virtual enve name> venv
+
+4 ACTIVATE
+.\<virtual enve name>\Scripts\activate
