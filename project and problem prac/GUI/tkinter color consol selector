@@ -16,8 +16,8 @@ def cb_work():
 #win namme
 root.title(" ")
 #win resolutions
-root.minsize(170,240)
-root.maxsize(170,240)
+root.minsize(210,290)
+root.maxsize(210,295)
 #gui message
 i='''Welcome in app
 Powerd by AKELA
